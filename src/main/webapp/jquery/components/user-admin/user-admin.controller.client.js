@@ -1,1 +1,61 @@
-alert("Allons-y!!")
+//IIFE
+(function () {
+
+    jQuery(main);
+
+    var tbody;
+    var template;
+    var userService = new UserServiceClient()
+
+    function main() {
+        tbody = $('tbody');
+        template = $('.template');
+
+        $('#createUser').click(createUser);
+
+        findAllUsers();
+    }
+
+    function findAllUsers() {
+        userService
+            .findAllUsers()
+            .then(renderUsers);
+    }
+    function renderUsers(users) {
+        tbody.empty();
+        for(var i=0; i<users.length; i++) {
+            var user = users[i];
+            var clone = template.clone();
+
+            clone.attr('id', user.id);
+
+            clone.find('.username')
+                .html(user.username);
+            clone.find('.firstname')
+                .html(user.firstName);
+            clone.find('.lastname')
+                .html(user.lastName);
+            tbody.append(clone);
+        }
+    }
+
+    function createUser() {
+        console.log('createUser');
+
+        var username = $('#usernameFld').val();
+        var password = $('#passwordFld').val();
+        var firstName = $('#firstNameFld').val();
+        var lastName = $('#lastNameFld').val();
+
+        var user = {
+            username: username,
+            password: password,
+            firstName: firstName,
+            lastName: lastName
+        };
+
+        userService
+            .createUser(user)
+            .then(findAllUsers);
+    }
+})();

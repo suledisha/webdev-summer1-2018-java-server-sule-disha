@@ -11,6 +11,7 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous">
     </script>
+    <script src="../../services/user.service.client.js"></script>
     <script src="user-admin.controller.client.js"></script>
 </head>
 <body>
@@ -26,20 +27,23 @@
 <th></th>
 </tr>
 <tr>
-<th><input class="form-control" placeholder="tardis"/></th>
-<th><input class="form-control" type="password"/></th>
-<th><input class="form-control" placeholder="Doctor"/></th>
-<th><input class="form-control" placeholder="Who"/></th>
-<th><button class="btn btn-success">Create</button></th>
+<th><input id="usernameFld" class="form-control" placeholder="tardis"/></th>
+<th><input id="passwordFld" class="form-control" type="password"/></th>
+<th><input id="firstNameFld" class="form-control" placeholder="Doctor"/></th>
+<th><input id="lastNameFld" class="form-control" placeholder="Who"/></th>
+<th><button id="createUser" class="btn btn-success">Create</button></th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>melodyPond</td>
+<tr class="template">
+<td class="username">melodyPond</td>
 <td>******</td>
-<td>River</td>
-<td>Song</td>
-<th><button class="btn btn-danger">Delete</button></th>
+<td class="firstname">River</td>
+<td class="lastname">Song</td>
+    <th>
+        <button class="delete btn btn-danger">Delete</button>
+        <button class="edit btn btn-danger">Edit</button>
+    </th>
 </tr>
 </tbody>
 <tfoot>
