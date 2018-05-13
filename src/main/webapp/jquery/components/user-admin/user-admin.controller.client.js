@@ -29,6 +29,8 @@
 
             clone.attr('id', user.id);
 
+            clone.find('.delete').click(deleteUser);
+
             clone.find('.username')
                 .html(user.username);
             clone.find('.firstname')
@@ -56,6 +58,18 @@
 
         userService
             .createUser(user)
+            .then(findAllUsers);
+    }
+
+    function deleteUser(event) {
+        var deleteBtn = $(event.currentTarget);
+        var userId = deleteBtn
+            .parent()
+            .parent()
+            .attr('id');
+
+        userService
+            .deleteUser(userId)
             .then(findAllUsers);
     }
 })();
