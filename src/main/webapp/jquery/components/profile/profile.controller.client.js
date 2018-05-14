@@ -11,6 +11,8 @@
         $staticUsername = $("#staticUsername");
         $firstName = $("#firstName");
         $lastName = $("#lastName");
+        $updateBtn = $("#updateBtn")
+            .click(updateUser);
 
         findUserById(62);
     }
@@ -26,5 +28,23 @@
         $staticUsername.val(user.username);
         $firstName.val(user.firstName);
         $lastName.val(user.lastName);
+    }
+
+    function updateUser() {
+        var user = {
+            firstName: $firstName.val(),
+            lastName: $lastName.val()
+        };
+        userService
+            .updateUser(62, user)
+            .then(success);
+    }
+
+    function success(response) {
+        if(response === null) {
+            alert('unable to update')
+        } else {
+            alert('success');
+        }
     }
 })();

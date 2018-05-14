@@ -53,7 +53,7 @@ function UserServiceClient() {
             }
         })
             .then(function(response){
-                if(response.bodyUsed) {
+                if(response!=null) {
                     return response.json();
                 } else {
                     return null;
