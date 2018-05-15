@@ -3,9 +3,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"/>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
-      integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
-      crossorigin="anonymous"/>
+    <link rel="stylesheet" href=
+            "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 <title>Insert title here</title>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -24,28 +23,47 @@
 <th>Password</th>
 <th>First Name</th>
 <th>Last Name</th>
-<th></th>
+<th>&nbsp;</th>
 </tr>
-<tr>
-<th><input id="usernameFld" class="form-control" placeholder="tardis"/></th>
-<th><input id="passwordFld" class="form-control" type="password"/></th>
-<th><input id="firstNameFld" class="form-control" placeholder="Doctor"/></th>
-<th><input id="lastNameFld" class="form-control" placeholder="Who"/></th>
-<th><button id="createUser" class="btn btn-success">Create</button></th>
+<tr class="wbdv-form">
+    <td><input id="usernameFld" class="form-control"
+               placeholder="Username" /></td>
+    <td><input id="passwordFld" class="form-control"
+               type="password"
+               placeholder="Password" /></td>
+    <td><input id="firstNameFld" class="form-control"
+               placeholder="First Name" /></td>
+    <td><input id="lastNameFld" class="form-control"
+               placeholder="Last Name" /></td>
+    <td><select id="roleFld" class="form-control">
+        <option value="FACULTY">Faculty</option>
+        <option value="STUDENT">Student</option>
+    </select></td>
+    <td><span class="float-right" style="white-space: nowrap">
+<i type="button" class="fa-2x fa fa-search wbdv -search"></i>
+        <i type="button" id="createUser"
+            class="fa-2x fa fa-plus wbdv-create"></i>
+        <i type="button" id="update"
+            class="fa-2x fa fa-check wbdv-update"></i>
+</span></td>
+</tr>
 </tr>
 </thead>
-<tbody>
-<tr class="template">
-<td class="username">melodyPond</td>
-<td>******</td>
-<td class="firstname">River</td>
-<td class="lastname">Song</td>
-    <th>
-        <button class="delete btn btn-danger">Delete</button>
-        <button class="edit btn btn-danger">Edit</button>
-    </th>
-</tr>
-</tbody>
+    <tbody class="wbdv-tbody">
+    <tr id="template" class="wbdv-template wbdv-user wbdv-hidden">
+        <td class="wbdv-username">ada</td>
+        <td>&nbsp;</td>
+        <td class="wbdv-first-name">Ada</td>
+        <td class="wbdv-last-name">Lovelace</td>
+        <td class="wbdv-role">FACULTY</td>
+        <td class="wbdv-actions">
+<span class="float-right">
+<i id="wbdv-remove" type="button" class="fa-2x fa fa-times wbdv-remove"></i>
+<i id="wbdv-edit" type="button" class="fa-2x fa fa-pencil wbdv-edit"></i>
+</span>
+        </td>
+    </tr>
+    </tbody>
 <tfoot>
 </tfoot>
 </table>

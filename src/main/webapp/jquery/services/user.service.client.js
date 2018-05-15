@@ -5,11 +5,18 @@ function UserServiceClient() {
     this.findUserById = findUserById;
     this.updateUser = updateUser;
     this.login = login;
+    this.success=success;
+    this.error=error;
+    this.register=register;
+    this.register_success=register_success;
+    this.findUserByUsername=findUserByUsername;
 
     this.url =
         'http://localhost:8080/api/user';
     this.login_url =
         'http://localhost:8080/api/login';
+    this.register_url =
+        'http://localhost:8080/api/register';
     var self = this;
 
     function findAllUsers() {
@@ -20,12 +27,15 @@ function UserServiceClient() {
     }
 
     function createUser(user) {
+        console.log(user)
         return fetch(self.url, {
             method: 'post',
             body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
             }
+        }).then(function (response) {
+            return response.json();
         });
     }
 
@@ -51,14 +61,20 @@ function UserServiceClient() {
             headers: {
                 'content-type': 'application/json'
             }
-        })
-            .then(function(response){
-                if(response!=null) {
-                    return response.json();
-                } else {
-                    return null;
-                }
-            });
+        }).then(success,error);
+    }
+
+    function success(response) {
+        console.log("In Success")
+        if(response.status===409)
+            alert('Unable to update');
+        else
+            alert("Success");
+    }
+
+    function error(response) {
+        console.log("In Error")
+        alert('Unable to update');
     }
 
     function findUserById(userId) {
@@ -66,5 +82,30 @@ function UserServiceClient() {
             .then(function(response){
                 return response.json();
             });
+    }
+
+
+    function findUserByUsername(user) {
+        console.log("in user.service.client");
+        console.log(user);
+        return fetch(self.register_url + '/' + user.userName);
+            //.then(register_success);
+    }
+
+    function register_success(response){
+        console.log("In Registration Success");
+        console.log("1");
+        console.log(response);
+
+        if(response.status===409){
+           alert("Can create User");
+        }
+        else
+        {
+            alert("user already present")
+        }
+    }
+    function register(user){
+        console.log(user);
     }
 }

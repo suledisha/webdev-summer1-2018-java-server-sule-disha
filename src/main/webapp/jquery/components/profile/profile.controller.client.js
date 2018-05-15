@@ -5,6 +5,7 @@
     var $firstName;
     var $lastName;
     var $updateBtn;
+    var id
     var userService = new UserServiceClient();
 
     function init() {
@@ -14,7 +15,16 @@
         $updateBtn = $("#updateBtn")
             .click(updateUser);
 
-        findUserById(62);
+        id = getUrlVars()[1]
+        findUserById(id);
+    }
+
+    function getUrlVars() {
+        var hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1);
+        hash = hashes.split('=');
+        console.log(hash)
+        return hash;
     }
 
     function findUserById(userId) {
@@ -36,15 +46,9 @@
             lastName: $lastName.val()
         };
         userService
-            .updateUser(62, user)
-            .then(success);
+            .updateUser(id, user);
+        console.log()
     }
 
-    function success(response) {
-        if(response === null) {
-            alert('unable to update')
-        } else {
-            alert('success');
-        }
-    }
+
 })();
