@@ -7,9 +7,9 @@ function UserServiceClient() {
     this.login = login;
     this.success=success;
     this.error=error;
-    this.register=register;
-    this.register_success=register_success;
     this.findUserByUsername=findUserByUsername;
+    //this.findUserByCredentials=findUserByCredentials;
+
 
     this.url =
         'http://localhost:8080/api/user';
@@ -44,13 +44,22 @@ function UserServiceClient() {
             method: 'delete'
         })
     }
+
     function login(username, password) {
-        return fetch(self.login, {
+        return fetch(self.login_url, {
             method: 'post',
             body: JSON.stringify({username:username, password: password}),
             headers: {
                 'content-type': 'application/json'
-            }
+            }}).then(function (response) {
+                if(response.status===200){
+                    return response.json();
+                }
+                else
+                {
+                    alert("Invalid username/password!")
+                }
+
         });
     }
 
@@ -92,20 +101,10 @@ function UserServiceClient() {
             //.then(register_success);
     }
 
-    function register_success(response){
-        console.log("In Registration Success");
-        console.log("1");
-        console.log(response);
-
-        if(response.status===409){
-           alert("Can create User");
-        }
-        else
-        {
-            alert("user already present")
-        }
-    }
-    function register(user){
+    /*
+    function findUserByCredentials(user){
+        console.log("in user.service.client");
         console.log(user);
-    }
+        return fetch(self.login_url);
+    }**/
 }

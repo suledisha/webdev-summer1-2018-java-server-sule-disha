@@ -30,9 +30,15 @@ public class UserService {
     }
 
     @PostMapping("/api/login")
-    public List<User> login(@RequestBody User user) {
-        return (List<User>) repository.findUserByCredentials(user.getUsername(), user.getPassword());
+    public User login(@RequestBody User user, HttpServletResponse response) {
+        Optional<User> data = repository.findUserByCredentials(user.getUsername(), user.getPassword());
+        if(data.isPresent()) {
+            return data.get();
+        }
+        response.setStatus(HttpServletResponse.SC_CONFLICT);
+        return null;
     }
+
     @PutMapping("/api/user/{userId}")
     public User updateUser(@PathVariable("userId") int userId, @RequestBody User newUser, HttpServletResponse response) {
         Optional<User> data = repository.findById(userId);
