@@ -4,6 +4,11 @@
     var $staticUsername;
     var $firstName;
     var $lastName;
+    var $role;
+    var $phone;
+    var $dob;
+    var $email;
+
     var $updateBtn;
     var id
     var userService = new UserServiceClient();
@@ -12,6 +17,10 @@
         $staticUsername = $("#staticUsername");
         $firstName = $("#firstName");
         $lastName = $("#lastName");
+        $role=  $("#role");
+        $phone = $("#phone");
+        $dob = $("#dob");
+        $email = $("#email");
         $updateBtn = $("#updateBtn")
             .click(updateUser);
 
@@ -38,12 +47,22 @@
         $staticUsername.val(user.username);
         $firstName.val(user.firstName);
         $lastName.val(user.lastName);
+        $role.val(user.role);
+        $phone.val(user.phone);
+        $dob.val(user.dob);
+        $email.val(user.email);
+
     }
 
     function updateUser() {
         var user = {
+            username: $staticUsername.val(),
             firstName: $firstName.val(),
-            lastName: $lastName.val()
+            lastName: $lastName.val(),
+            role: $role.val(),
+            phone: $phone.val(),
+            email: $email.val(),
+            dob: $dob.val()
         };
         userService
             .updateUser(id, user);
