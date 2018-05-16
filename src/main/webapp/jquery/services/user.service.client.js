@@ -107,4 +107,6 @@ function UserServiceClient() {
         console.log(user);
         return fetch(self.login_url);
     }**/
+
+
 }

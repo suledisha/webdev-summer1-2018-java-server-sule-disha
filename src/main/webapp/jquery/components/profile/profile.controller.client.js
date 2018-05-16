@@ -10,7 +10,8 @@
     var $email;
 
     var $updateBtn;
-    var id
+    var $logoutBtn;
+    var id;
     var userService = new UserServiceClient();
 
     function init() {
@@ -23,6 +24,8 @@
         $email = $("#email");
         $updateBtn = $("#updateBtn")
             .click(updateUser);
+        $logoutBtn = $("#logoutBtn")
+            .click(logout);
 
         id = getUrlVars()[1]
         findUserById(id);
@@ -67,6 +70,11 @@
         userService
             .updateUser(id, user);
         console.log()
+    }
+
+    function logout(){
+        console.log("Logging Out");
+        window.location.href = "http://localhost:8080/jquery/components/login/login.template.client.html"
     }
 
 
