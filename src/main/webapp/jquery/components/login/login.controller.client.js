@@ -25,7 +25,7 @@
         userService.login(user.username,user.password)
             .then(function (response) {
                 console.log(response);
-                window.location.href = "http://localhost:8080/jquery/components/profile/profile.template.client.html?userId=" + response.id
+                window.location.href = "/jquery/components/profile/profile.template.client.html?userId=" + response.id
 
             })}
 

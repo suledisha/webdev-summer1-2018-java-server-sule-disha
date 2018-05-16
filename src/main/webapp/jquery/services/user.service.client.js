@@ -12,11 +12,11 @@ function UserServiceClient() {
 
 
     this.url =
-        'http://localhost:8080/api/user';
+        '/api/user';
     this.login_url =
-        'http://localhost:8080/api/login';
+        '/api/login';
     this.register_url =
-        'http://localhost:8080/api/register';
+        '/api/register';
     var self = this;
 
     function findAllUsers() {
