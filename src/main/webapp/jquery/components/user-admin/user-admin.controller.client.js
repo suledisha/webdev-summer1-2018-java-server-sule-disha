@@ -120,6 +120,7 @@
         $username.val(user.username);
         $firstName.val(user.firstName);
         $lastName.val(user.lastName);
+        $role.val(user.role);
     }
 
     function updateUser(){
