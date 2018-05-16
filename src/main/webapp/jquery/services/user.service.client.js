@@ -4,6 +4,7 @@ function UserServiceClient() {
     this.deleteUser = deleteUser;
     this.findUserById = findUserById;
     this.updateUser = updateUser;
+    this.updateProfile=updateProfile;
     this.login = login;
     this.success=success;
     this.error=error;
@@ -17,6 +18,8 @@ function UserServiceClient() {
         '/api/login';
     this.register_url =
         '/api/register';
+    this.profile_url =
+        '/api/profile';
     var self = this;
 
     function findAllUsers() {
@@ -73,6 +76,16 @@ function UserServiceClient() {
         }).then(success,error);
     }
 
+    function updateProfile(user) {
+        return fetch(self.profile_url, {
+            method: 'put',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(success,error);
+    }
+
     function success(response) {
         console.log("In Success")
         if(response.status===409)
@@ -94,10 +107,15 @@ function UserServiceClient() {
     }
 
 
-    function findUserByUsername(user) {
+    function findUserByUsername(username) {
         console.log("in user.service.client");
-        console.log(user);
-        return fetch(self.register_url + '/' + user.userName);
+        console.log(username);
+        return fetch(self.register_url, {
+            method: 'post',
+            body: JSON.stringify({username:username}),
+            headers: {
+                'content-type': 'application/json'
+            }})
             //.then(register_success);
     }
 

@@ -134,7 +134,9 @@
         };
         console.log(newuser);
         console.log(id);
-        userService.updateUser(id,newuser);
+        userService
+            .updateUser(id,newuser)
+            .then(findAllUsers);
 
 
     }

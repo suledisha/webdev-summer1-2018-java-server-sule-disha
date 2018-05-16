@@ -23,7 +23,7 @@
         $dob = $("#dob");
         $email = $("#email");
         $updateBtn = $("#updateBtn")
-            .click(updateUser);
+            .click(updateProfile);
         $logoutBtn = $("#logoutBtn")
             .click(logout);
 
@@ -57,8 +57,9 @@
 
     }
 
-    function updateUser() {
+    function updateProfile() {
         var user = {
+            id:id,
             username: $staticUsername.val(),
             firstName: $firstName.val(),
             lastName: $lastName.val(),
@@ -68,8 +69,9 @@
             dob: $dob.val()
         };
         userService
-            .updateUser(id, user);
-        console.log()
+            .updateProfile(user);
+        console.log(id);
+        console.log(user);
     }
 
     function logout(){

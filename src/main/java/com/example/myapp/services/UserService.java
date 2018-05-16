@@ -39,9 +39,35 @@ public class UserService {
         return null;
     }
 
+    @PostMapping("/api/register")
+    public User findUserByUsername(@RequestBody User user, HttpServletResponse response) {
+        Optional<User> data = repository.findUserByUsername(user.getUsername());
+        if(data.isPresent()) {
+            return data.get();
+        }
+        response.setStatus(HttpServletResponse.SC_CONFLICT);
+        return null;
+    }
+
     @PutMapping("/api/user/{userId}")
     public User updateUser(@PathVariable("userId") int userId, @RequestBody User newUser, HttpServletResponse response) {
         Optional<User> data = repository.findById(userId);
+        if(data.isPresent()) {
+            User user = data.get();
+            user.setUsername(newUser.getUsername());
+            user.setFirstName(newUser.getFirstName());
+            user.setLastName(newUser.getLastName());
+            user.setRole(newUser.getRole());
+            repository.save(user);
+            return user;
+        }
+        response.setStatus(HttpServletResponse.SC_CONFLICT);
+        return null;
+    }
+
+    @PutMapping("/api/profile")
+    public User updateProfile(@RequestBody User newUser, HttpServletResponse response) {
+        Optional<User> data = repository.findById(newUser.getId());
         if(data.isPresent()) {
             User user = data.get();
             user.setUsername(newUser.getUsername());
@@ -67,13 +93,4 @@ public class UserService {
         return null;
     }
 
-    @GetMapping("api/register/{username}")
-    public User findUserByUsername(@PathVariable("username") String username, HttpServletResponse response) {
-        Optional<User> data = repository.findUserByUsername(username);
-        if(data.isPresent()) {
-            return data.get();
-        }
-        response.setStatus(HttpServletResponse.SC_CONFLICT);
-        return null;
-    }
 }
