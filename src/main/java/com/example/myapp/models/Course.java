@@ -11,6 +11,9 @@ public class Course {
     private String title;
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date modified;
+
 
     public int getId() {
         return id;
@@ -43,8 +46,4 @@ public class Course {
     public void setModified(Date modified) {
         this.modified = modified;
     }
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date modified;
-
 }
