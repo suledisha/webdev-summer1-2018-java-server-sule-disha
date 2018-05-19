@@ -1,9 +1,12 @@
 package com.example.myapp.models;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import java.util.Date;
 import javax.persistence.*;
 
 @Entity
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class Course {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
