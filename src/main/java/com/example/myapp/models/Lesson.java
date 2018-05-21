@@ -1,23 +1,22 @@
 package com.example.myapp.models;
 
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @CrossOrigin(origins = "*", maxAge = 3600)
-public class Module {
+public class Lesson {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String title;
     @ManyToOne
     @JsonIgnore
-    private Course course;
-    @OneToMany(mappedBy="module")
-    private List<Lesson> lessons;
+    private Module module;
+
     public int getId() {
         return id;
     }
@@ -34,19 +33,11 @@ public class Module {
         this.title = title;
     }
 
-    public Course getCourse() {
-        return course;
+    public Module getModule() {
+        return module;
     }
 
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-    public List<Lesson> getLessons() {
-        return lessons;
-    }
-
-    public void setLessons(List<Lesson> lessons) {
-        this.lessons = lessons;
+    public void setModule(Module module) {
+        this.module = module;
     }
 }
