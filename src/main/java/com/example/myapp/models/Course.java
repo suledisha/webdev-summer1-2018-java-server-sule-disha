@@ -1,5 +1,7 @@
 package com.example.myapp.models;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.Date;
@@ -14,8 +16,10 @@ public class Course {
     private int id;
     private String title;
     @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Date created;
     @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
     private Date modified;
 
     @OneToMany(mappedBy="course")
