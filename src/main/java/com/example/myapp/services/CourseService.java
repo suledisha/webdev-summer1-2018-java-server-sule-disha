@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.*;
 public class CourseService {
     @Autowired
     CourseRepository courseRepository;
+
     @GetMapping("/api/course")
     public Iterable<Course> findAllCourses() {
         return courseRepository.findAll();
     }
+
     @PostMapping("/api/course")
     public Course createCourse
             (@RequestBody Course course) {

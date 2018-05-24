@@ -4,11 +4,11 @@ function UserServiceClient() {
     this.deleteUser = deleteUser;
     this.findUserById = findUserById;
     this.updateUser = updateUser;
-    this.updateProfile=updateProfile;
+    this.updateProfile = updateProfile;
     this.login = login;
-    this.success=success;
-    this.error=error;
-    this.findUserByUsername=findUserByUsername;
+    this.success = success;
+    this.error = error;
+    this.findUserByUsername = findUserByUsername;
     //this.findUserByCredentials=findUserByCredentials;
 
 
@@ -51,17 +51,17 @@ function UserServiceClient() {
     function login(username, password) {
         return fetch(self.login_url, {
             method: 'post',
-            body: JSON.stringify({username:username, password: password}),
+            body: JSON.stringify({username: username, password: password}),
             headers: {
                 'content-type': 'application/json'
-            }}).then(function (response) {
-                if(response.status===200){
-                    return response.json();
-                }
-                else
-                {
-                    alert("Invalid username/password!")
-                }
+            }
+        }).then(function (response) {
+            if (response.status === 200) {
+                return response.json();
+            }
+            else {
+                alert("Invalid username/password!")
+            }
 
         });
     }
@@ -73,7 +73,7 @@ function UserServiceClient() {
             headers: {
                 'content-type': 'application/json'
             }
-        }).then(success,error);
+        }).then(success, error);
     }
 
     function updateProfile(user) {
@@ -83,12 +83,12 @@ function UserServiceClient() {
             headers: {
                 'content-type': 'application/json'
             }
-        }).then(success,error);
+        }).then(success, error);
     }
 
     function success(response) {
         console.log("In Success")
-        if(response.status===409)
+        if (response.status === 409)
             alert('Unable to update');
         else
             alert("Success");
@@ -101,7 +101,7 @@ function UserServiceClient() {
 
     function findUserById(userId) {
         return fetch(self.url + '/' + userId)
-            .then(function(response){
+            .then(function (response) {
                 return response.json();
             });
     }
@@ -112,11 +112,12 @@ function UserServiceClient() {
         console.log(username);
         return fetch(self.register_url, {
             method: 'post',
-            body: JSON.stringify({username:username}),
+            body: JSON.stringify({username: username}),
             headers: {
                 'content-type': 'application/json'
-            }})
-            //.then(register_success);
+            }
+        })
+        //.then(register_success);
     }
 
     /*

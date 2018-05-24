@@ -1,6 +1,5 @@
 package com.example.myapp.services;
 
-import com.example.myapp.models.Course;
 import com.example.myapp.models.Lesson;
 import com.example.myapp.models.Module;
 import com.example.myapp.repositories.CourseRepository;

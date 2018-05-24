@@ -10,7 +10,7 @@ import javax.persistence.*;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class Lesson {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     @ManyToOne

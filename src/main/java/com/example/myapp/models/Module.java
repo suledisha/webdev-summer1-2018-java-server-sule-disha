@@ -10,14 +10,15 @@ import java.util.List;
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class Module {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     @ManyToOne
     @JsonIgnore
     private Course course;
-    @OneToMany(mappedBy="module")
+    @OneToMany(mappedBy = "module")
     private List<Lesson> lessons;
+
     public int getId() {
         return id;
     }

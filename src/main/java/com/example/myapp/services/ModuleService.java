@@ -37,7 +37,7 @@ public class ModuleService {
             @PathVariable("courseId") int courseId) {
         Optional<Course> data =
                 courseRepository.findById(courseId);
-        if(data.isPresent()) {
+        if (data.isPresent()) {
             Course course = data.get();
             return course.getModules();
         }

@@ -4,15 +4,15 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
 
 @Entity
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class Course {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
     @Temporal(TemporalType.TIMESTAMP)
@@ -22,7 +22,7 @@ public class Course {
     @UpdateTimestamp
     private Date modified;
 
-    @OneToMany(mappedBy="course")
+    @OneToMany(mappedBy = "course")
     private List<Module> modules;
 
     public int getId() {
