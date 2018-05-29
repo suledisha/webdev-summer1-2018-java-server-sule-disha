@@ -1,11 +1,9 @@
 package com.example.myapp.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -26,6 +24,27 @@ public class Widget {
     private String listItem;
     private String listType;
     private String widgetType;
+
+    @ManyToOne
+    @JsonIgnore
+    private Lesson lesson;
+
+    public int getWidgetOrder() {
+        return widgetOrder;
+    }
+
+    public void setWidgetOrder(int widgetOrder) {
+        this.widgetOrder = widgetOrder;
+    }
+
+    public Lesson getLesson() {
+        return lesson;
+    }
+
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
+    }
+
 
     public String getWidgetType() {
         return widgetType;
@@ -49,14 +68,6 @@ public class Widget {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public int getOrder() {
-        return widgetOrder;
-    }
-
-    public void setOrder(int widgetOrder) {
-        this.widgetOrder = widgetOrder;
     }
 
     public String getText() {
@@ -138,4 +149,5 @@ public class Widget {
     public void setListType(String listType) {
         this.listType = listType;
     }
+
 }

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -16,6 +17,18 @@ public class Lesson {
     @ManyToOne
     @JsonIgnore
     private Module module;
+
+    @OneToMany(mappedBy="lesson")
+    private List<Widget> widgets;
+
+    public List<Widget> getWidgets() {
+        return widgets;
+    }
+
+    public void setWidgets(List<Widget> widgets) {
+        this.widgets = widgets;
+    }
+
 
     public int getId() {
         return id;
@@ -40,4 +53,6 @@ public class Lesson {
     public void setModule(Module module) {
         this.module = module;
     }
+
+
 }

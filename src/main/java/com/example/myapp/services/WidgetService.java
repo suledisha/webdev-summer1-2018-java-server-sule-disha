@@ -1,12 +1,16 @@
 package com.example.myapp.services;
 
 
+import com.example.myapp.models.Course;
+import com.example.myapp.models.Lesson;
 import com.example.myapp.models.Widget;
+import com.example.myapp.repositories.LessonRepository;
 import com.example.myapp.repositories.WidgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -14,6 +18,8 @@ public class WidgetService {
 
     @Autowired
     WidgetRepository widgetRepository;
+    @Autowired
+    LessonRepository lessonRepository;
 
     @GetMapping("/api/widgets")
     public List<Widget> findAllWidgets(){
@@ -29,5 +35,40 @@ public class WidgetService {
         }
 
     }
+
+    @PostMapping("/api/lesson/{lessonId}/widgets")
+    public void saveAllWidgetsForLesson(
+            @PathVariable("lessonId") int lessonId,
+            @RequestBody List<Widget> widgets) {
+
+        Optional<Lesson> data = lessonRepository.findById(lessonId);
+        if(data.isPresent()) {
+            Lesson lesson = data.get();
+            List<Widget> widgetslist=lesson.getWidgets();
+            for(Widget widget: widgetslist){
+                widgetRepository.deleteById(widget.getId());
+            }
+            for(Widget widget: widgets){
+                widget.setLesson(lesson);
+                widgetRepository.save(widget);
+            }
+        }
+    }
+
+    @GetMapping("/api/lesson/{lessonId}/widgets")
+    public List<Widget> findAllWidgetsForLesson(
+            @PathVariable("lessonId") int lessonId) {
+        Optional<Lesson> data =
+                lessonRepository.findById(lessonId);
+        if(data.isPresent()) {
+            Lesson lesson = data.get();
+            return lesson.getWidgets();
+        }
+        return null;
+    }
+
+
+
+
 
 }
