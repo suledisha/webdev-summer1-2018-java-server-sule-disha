@@ -9,6 +9,8 @@ import com.example.myapp.repositories.WidgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,7 +64,16 @@ public class WidgetService {
                 lessonRepository.findById(lessonId);
         if(data.isPresent()) {
             Lesson lesson = data.get();
-            return lesson.getWidgets();
+            List<Widget> widgets= lesson.getWidgets();
+
+            Collections.sort(widgets, new Comparator<Widget>() {
+                @Override
+                public int compare(Widget w1, Widget w2) {
+                    return Integer.compare(w1.getWidgetOrder(), w2.getWidgetOrder());
+                    //return w1.getWidgetOrder() > w2.getWidgetOrder()? 1: w1.getWidgetOrder() < w2.getWidgetOrder()? -1 : 0;
+                }
+            });
+            return widgets;
         }
         return null;
     }
