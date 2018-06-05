@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
-
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 @Entity
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class Widget {
