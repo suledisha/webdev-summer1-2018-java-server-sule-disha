@@ -25,6 +25,8 @@ public class PopulateService {
     ExamRepository examRepository;
     @Autowired
     TrueFalseQuestionRepository trueFalseQuestionRepository;
+    @Autowired
+    MultipleChoiceQuestionRepository multipleChoiceQuestionRepository;
 
     @GetMapping("/api/create/course")
     public Course createCourse() {
@@ -79,7 +81,7 @@ public class PopulateService {
 
 
     @GetMapping("/api/create/exam/{examId}/TFQuestion")
-    public TrueFalseQuestion createQuestion(@PathVariable("examId") int examId){
+    public TrueFalseQuestion createTFQuestion(@PathVariable("examId") int examId){
         Optional<Exam> data = examRepository.findById(examId);
         TrueFalseQuestion tfq= new TrueFalseQuestion();
         if (data.isPresent()) {
@@ -88,6 +90,21 @@ public class PopulateService {
             tfq.setTitle("True Or False Question 1");
             tfq.setExam(exam);
             return trueFalseQuestionRepository.save(tfq);
+        }
+        return null;
+    }
+
+
+    @GetMapping("/api/create/exam/{examId}/MCQuestion")
+    public MultipleChoiceQuestion createMCQuestion(@PathVariable("examId") int examId){
+        Optional<Exam> data = examRepository.findById(examId);
+        MultipleChoiceQuestion mcq= new MultipleChoiceQuestion();
+        if (data.isPresent()) {
+            Exam exam = data.get();
+            mcq.setId('1');
+            mcq.setTitle("Multiple Choice Question 1");
+            mcq.setExam(exam);
+            return multipleChoiceQuestionRepository.save(mcq);
         }
         return null;
     }
