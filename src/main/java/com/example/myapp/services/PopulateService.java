@@ -77,6 +77,20 @@ public class PopulateService {
         return null;
     }
 
+
+    @GetMapping("/api/create/exam/{examId}/TFQuestion")
+    public TrueFalseQuestion createQuestion(@PathVariable("examId") int examId){
+        Optional<Exam> data = examRepository.findById(examId);
+        TrueFalseQuestion tfq= new TrueFalseQuestion();
+        if (data.isPresent()) {
+            Exam exam = data.get();
+            tfq.setId('1');
+            tfq.setTitle("True Or False Question 1");
+            tfq.setExam(exam);
+            return trueFalseQuestionRepository.save(tfq);
+        }
+        return null;
+    }
 }
 
 
