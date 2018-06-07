@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.soap.Addressing;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -21,6 +18,31 @@ public class ExamService {
     LessonRepository lessonRepository;
     @Autowired
     ExamRepository examRepository;
+
+
+    @GetMapping("/api/lesson/{lessonId}/exam")
+    public List<Exam> findAllExamsForLesson(
+            @PathVariable("lessonId") int lessonId) {
+        Optional<Lesson> data =
+                lessonRepository.findById(lessonId);
+        List<Exam> exams = new ArrayList<>();
+        if(data.isPresent()) {
+            Lesson lesson = data.get();
+            List<Widget> widgets= lesson.getWidgets();
+            for (Widget widget : widgets) {
+                if (widget.getWidgetType().equalsIgnoreCase("Exam")) {
+                    Optional<Exam> exam = examRepository.findById(widget.getId());
+                    if (exam.isPresent()) {
+                        Exam ex=exam.get();
+                        exams.add(ex);
+                    }
+                }
+            }
+
+            return exams;
+        }
+        return null;
+    }
 
     @PostMapping("/api/lesson/{lessonId}/exam")
     public Exam createExam(@PathVariable("lessonId") int lessonId,

@@ -34,7 +34,7 @@ public class EssayService {
     }
     return null;
 }
-    @PutMapping("/api/essay/{essayID}")
+    @PutMapping("/api/essay/{essayId}")
     public EssayQuestion updateEssay(@PathVariable("essayId") int essayId,
                                      @RequestBody EssayQuestion newEssayQuestion){
         Optional<EssayQuestion> data = essayQuestionRepository.findById(essayId);
